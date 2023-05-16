@@ -1,14 +1,41 @@
-import { createContext, useState } from "react";
-import { getAuth } from "firebase/auth";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { createContext, useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
-const auth = getAuth();
+const auth = getAuth(app);
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const createUser = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    const signIn = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    // user observer
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser=>{
+            setUser(currentUser);
+            console.log(currentUser);
+            setLoading(false);
+        });
+        return () => {
+            unsubscribe();
+        }
+    },[]);
+
     const authInfo = {
+        createUser,
+        signIn,
         user,
         loading
     }

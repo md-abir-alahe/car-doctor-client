@@ -1,11 +1,26 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Signup = () => {
+    const { createUser } = useContext(AuthContext);
 
     const handleSignup = event => {
         event.preventDefault();
-
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, email, password);
+        createUser(email, password)
+        .then(result => {
+            const createdUser = result.user;
+            console.log(createdUser);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (
@@ -23,19 +38,19 @@ const Signup = () => {
                                     <label className="label">
                                         <span className="label-text">Name</span>
                                     </label>
-                                    <input type="text" placeholder="name" className="input input-bordered" />
+                                    <input type="text"  name='name' placeholder="name" className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" placeholder="email" className="input input-bordered" />
+                                    <input type="email" name='email'  placeholder="email" className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Confirm Password</span>
                                     </label>
-                                    <input type="text" placeholder="password" className="input input-bordered" />
+                                    <input type="text"  name='password' placeholder="password" className="input input-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
                                     <input className="btn btn-primary" type="submit" value="Sign Up" />
