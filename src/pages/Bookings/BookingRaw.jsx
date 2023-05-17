@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 
 
-const BookingRaw = ({ booking, handleDelete }) => {
+const BookingRaw = ({ booking, handleDelete, handleBookingConfirm }) => {
 
-    const { _id, customerName, email, price, date, service, img } = booking;
+    const { _id,  price, date, service, img, status } = booking;
+
 
     
 
@@ -25,7 +26,10 @@ const BookingRaw = ({ booking, handleDelete }) => {
                 <td>{date}</td>
                 <td>$ {price}</td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                {
+                    status === 'confirm' ? <span className="font-bold text-primary">Confirmed</span> :
+                    <button onClick={() => handleBookingConfirm(_id)} className="btn btn-ghost btn-xs">Please Confirm</button>
+                }
                 </th>
             </tr>
     );

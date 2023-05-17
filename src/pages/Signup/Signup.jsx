@@ -50,7 +50,7 @@ const Signup = () => {
                                     <label className="label">
                                         <span className="label-text">Confirm Password</span>
                                     </label>
-                                    <input type="text"  name='password' placeholder="password" className="input input-bordered" />
+                                    <input type="password"  name='password' placeholder="password" className="input input-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
                                     <input className="btn btn-primary" type="submit" value="Sign Up" />
