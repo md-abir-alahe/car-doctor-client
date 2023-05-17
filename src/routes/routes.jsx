@@ -28,7 +28,7 @@ const router = createBrowserRouter([
                 path: '/checkout/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
                 loader: ({params})=> {
-                   return fetch(`http://localhost:5000/services/${params.id}`)
+                   return fetch(`https://car-doctor-server-delta-coral.vercel.app/services/${params.id}`)
                 }
             },
             {
