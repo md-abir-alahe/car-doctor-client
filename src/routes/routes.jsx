@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import CheckOut from "../pages/CheckOut/CheckOut";
 import BookService from "../pages/BookService/BookService";
+import Bookings from "../pages/Bookings/Bookings";
 
 const router = createBrowserRouter([
     {
@@ -31,9 +32,10 @@ const router = createBrowserRouter([
                 }
             },
             {
-                path: '/bookservice',
-                element: <BookService></BookService>
-            }
+                path: '/bookings',
+                element: <Bookings></Bookings>
+            },
+
         ]
     },
 ]);
